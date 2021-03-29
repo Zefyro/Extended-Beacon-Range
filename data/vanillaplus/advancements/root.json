@@ -1,0 +1,24 @@
+{
+    "display": {
+        "title": {
+            "text": "Vanilla+",
+            "color": "white"
+        },
+        "description": {
+            "text": "Main branch of Vanilla + datapacks"
+        },
+        "icon": {
+            "item": "minecraft:command_block_minecart"
+        },
+        "frame": "task",
+        "show_toast": false,
+        "announce_to_chat": false,
+        "hidden": false,
+        "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+    },
+    "criteria": {
+        "Main": {
+            "trigger": "minecraft:impossible"
+        }
+    }
+}
