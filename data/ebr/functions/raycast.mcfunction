@@ -6,5 +6,5 @@
 ############################################################
 #--------------------------Raycast-------------------------#
 execute if block ~ ~ ~ beacon run function ebr:setup
-execute if block ~ ~ ~ air positioned ^ ^ ^0.1 run function ebr:raycast
+execute if block ~ ~ ~ #ebr:raycast positioned ^ ^ ^0.1 run function ebr:raycast
 #----------------------------------------------------------#

@@ -4,11 +4,10 @@
 # https://www.youtube.com/channel/UCFvS2PqA3qt1MgR3C9X_bog #
 #                https://github.com/Zefyro                 #
 ############################################################
-#-----------------------Scoreboards------------------------#
-scoreboard objectives remove ebr.Detect
-scoreboard objectives remove ebr.Levels
-scoreboard objectives remove ebr.Primary
-scoreboard objectives remove ebr.Secondary
-scoreboard objectives remove ebr.Y
-scoreboard objectives remove VP.ebr
+#---------------------------Tick---------------------------#
+scoreboard players operation @s ebr.Y -= #MaxY ebr.Y
+scoreboard players operation @s ebr.Y /= #Neg1 ebr.Y
+#---------------------------Beam---------------------------#
+function ebr:beacon/beam_check
+execute unless score @s ebr.Y matches 0 run scoreboard players set @s ebr.Levels 0
 #----------------------------------------------------------#

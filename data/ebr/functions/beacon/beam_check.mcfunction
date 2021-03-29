@@ -4,11 +4,7 @@
 # https://www.youtube.com/channel/UCFvS2PqA3qt1MgR3C9X_bog #
 #                https://github.com/Zefyro                 #
 ############################################################
-#-----------------------Scoreboards------------------------#
-scoreboard objectives remove ebr.Detect
-scoreboard objectives remove ebr.Levels
-scoreboard objectives remove ebr.Primary
-scoreboard objectives remove ebr.Secondary
-scoreboard objectives remove ebr.Y
-scoreboard objectives remove VP.ebr
+#---------------------------Beam---------------------------#
+execute unless score @s ebr.Y matches ..0 run scoreboard players remove @s ebr.Y 1
+execute if block ~ ~ ~ #ebr:beam unless block ~ ~ ~ #minecraft:slabs[type=double] if score @s ebr.Y < #MaxY ebr.Y positioned ~ ~1 ~ run function ebr:beacon/beam_check
 #----------------------------------------------------------#

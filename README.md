@@ -2,6 +2,9 @@
 A datapack for extending the effect range of beacons.
 
 # Changes
+
+Note that you need to replace the beacons you already have in your world.
+
 ---
 Pyramid Size |Extended Range |Vanilla Range |Effect Duration
 ---|---|--:|---

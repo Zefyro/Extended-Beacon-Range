@@ -9,5 +9,8 @@ scoreboard objectives add ebr.Detect minecraft.used:minecraft.beacon
 scoreboard objectives add ebr.Levels dummy
 scoreboard objectives add ebr.Primary dummy
 scoreboard objectives add ebr.Secondary dummy
+scoreboard objectives add ebr.Y dummy
 scoreboard objectives add VP.ebr dummy
+scoreboard players set #MaxY ebr.Y 255
+scoreboard players set #Neg1 ebr.Y -1
 #----------------------------------------------------------#
