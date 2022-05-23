@@ -5,6 +5,8 @@
 #                https://github.com/Zefyro                 #
 ############################################################
 #----------------------------------------------------------#
-execute if entity @s[predicate=ebr:primary/speed] positioned ~-50 ~-50 ~-50 run effect give @a[dx=100,dz=100,dy=435] speed 11 0
-execute if entity @s[predicate=ebr:primary/haste] positioned ~-50 ~-50 ~-50 run effect give @a[dx=100,dz=100,dy=435] haste 11 0
+data modify entity @s data.ebr.Primary set from block ~ ~ ~ Primary
+data modify entity @s data.ebr.Secondary set from block ~ ~ ~ Secondary
+data modify entity @s data.ebr.Levels set from block ~ ~ ~ Levels
+execute store result score @s ebr.Beam run data get block ~ ~ ~ y
 #----------------------------------------------------------#

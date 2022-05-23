@@ -5,6 +5,8 @@
 #                https://github.com/Zefyro                 #
 ############################################################
 #----------------------------------------------------------#
-execute if entity @s[predicate=ebr:primary/speed] positioned ~-50 ~-50 ~-50 run effect give @a[dx=100,dz=100,dy=435] speed 11 0
-execute if entity @s[predicate=ebr:primary/haste] positioned ~-50 ~-50 ~-50 run effect give @a[dx=100,dz=100,dy=435] haste 11 0
+execute unless score .temp1 ebr.Beam matches 0 run scoreboard players remove .temp1 ebr.Beam 1
+execute if block ~ ~ ~ #ebr:beam unless block ~ ~ ~ #minecraft:slabs[type=double] if score .temp1 ebr.Beam >= .temp ebr.Beam positioned ~ ~1 ~ run function ebr:beacon/check_beam
+execute if score .temp1 ebr.Beam matches 0 run data modify entity @s data.ebr.Beam set value 1
+execute unless score .temp1 ebr.Beam matches 0 run data modify entity @s data.ebr.Beam set value 0
 #----------------------------------------------------------#

@@ -4,13 +4,12 @@
 # https://www.youtube.com/channel/UCFvS2PqA3qt1MgR3C9X_bog #
 #                https://github.com/Zefyro                 #
 ############################################################
-#-----------------------Scoreboards------------------------#
-scoreboard objectives add ebr.Detect minecraft.used:minecraft.beacon
-scoreboard objectives add ebr.Levels dummy
-scoreboard objectives add ebr.Primary dummy
-scoreboard objectives add ebr.Secondary dummy
-scoreboard objectives add ebr.Y dummy
-scoreboard objectives add VP.ebr dummy
-scoreboard players set #MaxY ebr.Y 255
-scoreboard players set #Neg1 ebr.Y -1
+#----------------------------------------------------------#
+tellraw @a [{"text": "Loading datapack ","color": "green"}, {"text":"\"Extended Beacon Range v1.0\"","color": "gray","hoverEvent": {"action": "show_text","value": "\"Extended-Beacon-Range_v1.0.zip\""},"clickEvent": {"action": "open_url", "value": "https://github.com/Zefyro/Extended-Beacon-Range"}}, {"text":"...", "color": "green"}]
+#----------------------------------------------------------#
+scoreboard objectives add ebr.Interact minecraft.custom:minecraft.interact_with_beacon
+scoreboard objectives add ebr.Beam dummy
+#----------------------------------------------------------#
+schedule function ebr:5seconds 5s
+schedule function ebr:second 1s
 #----------------------------------------------------------#

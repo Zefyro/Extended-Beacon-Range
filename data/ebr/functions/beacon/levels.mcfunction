@@ -5,6 +5,8 @@
 #                https://github.com/Zefyro                 #
 ############################################################
 #----------------------------------------------------------#
-execute if entity @s[predicate=ebr:primary/speed] positioned ~-50 ~-50 ~-50 run effect give @a[dx=100,dz=100,dy=435] speed 11 0
-execute if entity @s[predicate=ebr:primary/haste] positioned ~-50 ~-50 ~-50 run effect give @a[dx=100,dz=100,dy=435] haste 11 0
+execute if entity @s[predicate=ebr:level-1] run function ebr:beacon/levels/1
+execute if entity @s[predicate=ebr:level-2] run function ebr:beacon/levels/2
+execute if entity @s[predicate=ebr:level-3] run function ebr:beacon/levels/3
+execute if entity @s[predicate=ebr:level-4] run function ebr:beacon/levels/4
 #----------------------------------------------------------#

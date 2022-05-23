@@ -4,11 +4,14 @@
 # https://www.youtube.com/channel/UCFvS2PqA3qt1MgR3C9X_bog #
 #                https://github.com/Zefyro                 #
 ############################################################
-#-----------------------Scoreboards------------------------#
-scoreboard objectives remove ebr.Detect
-scoreboard objectives remove ebr.Levels
-scoreboard objectives remove ebr.Primary
-scoreboard objectives remove ebr.Secondary
-scoreboard objectives remove ebr.Y
-scoreboard objectives remove VP.ebr
+#----------------------------------------------------------#
+tellraw @a [{"text": "Disabling datapack ","color": "red"}, {"text":"\"Extended Beacon Range v1.0\"","color": "gray","hoverEvent": {"action": "show_text","value": "\"Extended-Beacon-Range_v1.0.zip\""},"clickEvent": {"action": "open_url", "value": "https://github.com/Zefyro/Extended-Beacon-Range"}}, {"text":"...", "color": "red"}]
+#----------------------------------------------------------#
+scoreboard objectives remove ebr.Interact
+scoreboard objectives remove ebr.Beam
+#----------------------------------------------------------#
+schedule clear ebr:5seconds
+schedule clear ebr:second
+#----------------------------------------------------------#
+datapack disable "Extended-Beacon-Range_v1.0.zip"
 #----------------------------------------------------------#

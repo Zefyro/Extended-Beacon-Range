@@ -5,6 +5,7 @@
 #                https://github.com/Zefyro                 #
 ############################################################
 #----------------------------------------------------------#
-execute if entity @s[predicate=ebr:primary/speed] positioned ~-50 ~-50 ~-50 run effect give @a[dx=100,dz=100,dy=435] speed 11 0
-execute if entity @s[predicate=ebr:primary/haste] positioned ~-50 ~-50 ~-50 run effect give @a[dx=100,dz=100,dy=435] haste 11 0
+execute as @e[type=#ebr:beacon,tag=ebr.Beacon] at @s unless block ~ ~ ~ minecraft:beacon run function ebr:beacon/kill
+#----------------------------------------------------------#
+schedule function ebr:second 1s
 #----------------------------------------------------------#

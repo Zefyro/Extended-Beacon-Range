@@ -4,10 +4,9 @@
 # https://www.youtube.com/channel/UCFvS2PqA3qt1MgR3C9X_bog #
 #                https://github.com/Zefyro                 #
 ############################################################
-#---------------------------Tick---------------------------#
-scoreboard players operation @s ebr.Y -= #MaxY ebr.Y
-scoreboard players operation @s ebr.Y /= #Neg1 ebr.Y
-#---------------------------Beam---------------------------#
-function ebr:beacon/beam_check
-execute unless score @s ebr.Y matches 0 run scoreboard players set @s ebr.Levels 0
+#----------------------------------------------------------#
+scoreboard players operation .temp ebr.Beam = @s ebr.Beam
+scoreboard players set .temp1 ebr.Beam 319
+scoreboard players operation .temp1 ebr.Beam -= .temp ebr.Beam
+function ebr:beacon/check_beam
 #----------------------------------------------------------#
