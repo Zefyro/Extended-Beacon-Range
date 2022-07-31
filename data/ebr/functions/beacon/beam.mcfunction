@@ -7,6 +7,5 @@
 #----------------------------------------------------------#
 scoreboard players operation .temp ebr.Beam = @s ebr.Beam
 scoreboard players set .temp1 ebr.Beam 319
-scoreboard players operation .temp1 ebr.Beam -= .temp ebr.Beam
 function ebr:beacon/check_beam
 #----------------------------------------------------------#
