@@ -1,0 +1,361 @@
+
+tellraw @a [
+    {
+        "text": "Loading datapack ",
+        "color": "green"
+    },
+    {
+        "text":"\"Extended Beacon Range v2.0\"",
+        "color": "gray",
+        "hoverEvent": {
+            "action": "show_text",
+            "value": "\"Extended-Beacon-Range_v2.0.zip\""
+        },
+        "clickEvent": {
+            "action": "open_url",
+            "value": "https://github.com/Zefyro/Extended-Beacon-Range"
+        }
+    }, 
+    {
+        "text":"...", 
+        "color": "green"
+    }
+];
+
+Scoreboard.add(ebr.Interact, minecraft.custom:minecraft.interact_with_beacon);
+
+schedule function 5seconds() 5s;
+schedule function second() 1s;
+
+function second() {
+    execute 
+        as @e[type=#ebr:beacon, tag=ebr.Beacon] 
+        at @s 
+        unless block ~ ~ ~ minecraft:beacon 
+        run Beacon.kill();
+    schedule function second() 1s;
+}
+
+function 5seconds() {
+    execute 
+        as @e[type=#ebr:beacon, tag=ebr.Beacon] 
+        at @s 
+        run Beacon.cycle();
+    schedule function 5seconds() 5s;
+}
+
+class Beacon {
+    function kill() {
+        tp @s ~ -256 ~;
+        kill @s;
+    }
+
+    function cycle() {
+        execute 
+            as @s[type=shulker] 
+            run Beacon.kill();
+        execute 
+            as @s[type=marker] 
+            run {
+                Beacon.data();
+                Beacon.beam();
+                execute run {
+                    $execute 
+                        if entity @s[predicate=ebr:beam]
+                        run function ebr:beacon/levels/$(Levels);
+                }  with entity @s data.ebr;
+            }
+    }
+
+    class Levels {
+        function 1() {
+            execute 
+                positioned ~-50 ~-50 ~-50 
+                run {
+                    $effect give @a[dx=100,dy=435,dz=100] $(primary_effect) 11 0;
+                } with entity @s data.ebr;
+        }
+        function 2() {
+            execute 
+                positioned ~-75 ~-75 ~-75
+                run {
+                    $effect give @a[dx=150,dy=435,dz=150] $(primary_effect) 13 0;
+                } with entity @s data.ebr;
+        }
+        function 3() {
+            execute 
+                positioned ~-100 ~-100 ~-100 
+                run {
+                    $effect give @a[dx=200,dy=435,dz=200] $(primary_effect) 15 0;
+                } with entity @s data.ebr;
+        }
+        function 4() {
+            execute 
+                positioned ~-125 ~-125 ~-125 
+                run {
+                    $effect give @a[dx=250,dy=435,dz=250] $(primary_effect) 17 0;
+                    data merge storage ebr:beacon {secondary_effect: "minecraft:regeneration"};
+                    execute 
+                        store result 
+                        storage ebr:beacon amplifier int 1 
+                        run data modify storage ebr:beacon secondary_effect 
+                        set from entity @s data.ebr.secondary_effect;
+                    Beacon.Levels.secondary() with storage ebr:beacon;
+                } with entity @s data.ebr;
+        }
+        function secondary() {
+            $effect give @a[dx=250,dy=435,dz=250] $(secondary_effect) 17 $(amplifier);
+        }
+    }
+
+    function beam() {
+        $checked_y = __variable__:@s;
+        if (dimension minecraft:overworld) {
+            Beacon.beam_check(build_height="319");
+        }
+        else {
+            Beacon.beam_check(build_height="255");
+        }
+    }
+
+    function beam_check() {
+        $execute 
+            unless score $checked_y __variable__ matches $(build_height) 
+            run $checked_y++;
+        $y = $checked_y;
+        $y++;
+        $execute 
+            if block ~ ~ ~ #ebr:beam 
+            unless block ~ ~ ~ #minecraft:slabs[type=double]
+            if score $y __variable__ matches ..$(build_height)
+            positioned ~ ~1 ~ 
+            run Beacon.beam_check(build_height="$(build_height)");
+
+        $execute
+            store success entity @s data.ebr.Beam int 1
+            if score $checked_y __variable__ matches $(build_height);
+    }
+
+    function data() {
+        BEACON(data.ebr.primary_effect, primary_effect);
+        BEACON(data.ebr.secondary_effect, secondary_effect);
+        BEACON(data.ebr.Levels, Levels);
+        __variable__:@s = execute run data get block ~ ~ ~ y;
+    }
+
+    function interact() {
+        advancement revoke @s only ebr:interact;
+        scoreboard players reset @s ebr.Interact;
+        execute 
+            anchored eyes 
+            facing ^ ^ ^1 
+            positioned ^ ^ ^.01 
+            run Beacon.Interact.raycast();
+    }
+    class Interact {
+        function found() {
+            execute 
+                if block ~ ~ ~ minecraft:beacon 
+                align xyz 
+                positioned ~.5 ~ ~.5 
+                unless entity @e[type=marker, tag=ebr.Beacon, distance=...1]
+                run {
+                    Beacon.Helper.shulker();
+                    Beacon.Helper.marker();
+                }
+
+            execute 
+                unless block ~ ~ ~ minecraft:beacon 
+                if block ~ ~-1 ~ minecraft:beacon
+                align xyz 
+                positioned ~.5 ~-1 ~.5 
+                unless entity @e[type=marker, tag=ebr.Beacon, distance=...1]
+                run {
+                    Beacon.Helper.shulker();
+                    Beacon.Helper.marker();
+                }
+        }
+
+        function raycast() {
+            execute 
+                if block ~ ~ ~ minecraft:beacon 
+                run Beacon.Interact.found();
+            execute 
+                if block ~ ~ ~ #ebr:raycast 
+                positioned ^ ^ ^0.1 
+                run Beacon.Interact.raycast();
+        }
+    }
+    class Helper {
+        function marker() {
+            summon marker ~ ~ ~ {
+                Tags:[
+                    "ebr.Beacon"
+                ],
+                data:{
+                    ebr:{
+                        secondary_effect:"", 
+                        Levels:0,
+                        primary_effect:""
+                    }
+                },
+                CustomName:'{"text":"Beacon"}'
+            };
+        }
+        function shulker() {
+            summon shulker ~ ~ ~ {
+                Tags:[
+                    "ebr.Beacon-Found",
+                    "ebr.Beacon"
+                ],
+                NoGravity:1b,
+                PersistenceRequired:1b,
+                NoAI:1b,
+                AttachFace:0b,
+                Invulnerable:1b,
+                active_effects:[
+                    {
+                        id:"minecraft:invisibility",
+                        amplifier:1b,
+                        duration:100,
+                        show_particles:0b
+                    },
+                    {
+                        id:"minecraft:glowing",
+                        amplifier:1b,
+                        duration:100,
+                        show_particles:0b
+                    }
+                ]
+            };
+        }
+    }
+}
+
+function uninstall() {
+    tellraw @a [
+        {
+            "text": "Uninstalling datapack ",
+            "color": "red"
+        }, 
+        {
+            "text":"\"Extended Beacon Range v2.0\"",
+            "color": "gray",
+            "hoverEvent": {
+                "action": "show_text",
+                "value": "\"Extended-Beacon-Range_v2.0.zip\""
+            },
+            "clickEvent": {
+                "action": "open_url",
+                "value": "https://github.com/Zefyro/Extended-Beacon-Range"
+            }
+        },
+        {
+            "text":"...", 
+            "color": "red"
+        }
+    ];
+    schedule clear 5seconds();
+    schedule clear second();
+    tellraw @a [
+        {
+            "text": "You can now uninstall the datapack by ",
+            "color": "green"
+        }, 
+        {
+            "text": "clicking here",
+            "color": "red",
+            "clickEvent": {
+                "action": "suggest_command",
+                "value": "/datapack disable \"Extended-Beacon-Range_v2.0.zip\""
+            }
+        }
+    ];
+}
+
+new advancement(interact) {
+    "criteria": {
+        "requirement": {
+            "trigger": "minecraft:tick",
+            "conditions": {
+                "player": [
+                    {
+                        "condition": "minecraft:entity_scores",
+                        "entity": "this",
+                        "scores": {
+                            "ebr.Interact": {
+                                "min": 1,
+                                "max": 2147483647
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "function": "ebr:beacon/interact"
+    }
+}
+
+new predicates(beam) {
+    "condition": "minecraft:entity_properties",
+    "entity": "this",
+    "predicate": {
+        "nbt": "{data:{ebr:{Beam:1}}}"
+    }
+}
+
+new tags.blocks(raycast) {
+    "values": [
+        "minecraft:air",
+        "minecraft:water",
+        "minecraft:lava"
+    ]
+}
+
+new tags.blocks(beam) {
+    "values": [
+        "#ebr:raycast",
+        "minecraft:beacon",
+        "minecraft:bedrock",
+        "#minecraft:anvil",
+        "#minecraft:banners",
+        "#minecraft:beds",
+        "#minecraft:buttons",
+        "#minecraft:campfires",
+        "#minecraft:climbable",
+        "#minecraft:coral_plants",
+        "#minecraft:crops",
+        "#minecraft:doors",
+        "#minecraft:fence_gates",
+        "#minecraft:fences",
+        "#minecraft:fire",
+        "#minecraft:flower_pots",
+        "#minecraft:flowers",
+        "#minecraft:ice",
+        "#minecraft:leaves",
+        "#minecraft:portals",
+        "#minecraft:rails",
+        "#minecraft:pressure_plates",
+        "#minecraft:saplings",
+        "#minecraft:shulker_boxes",
+        "#minecraft:signs",
+        "#minecraft:slabs",
+        "#minecraft:stairs",
+        "#minecraft:trapdoors",
+        "#minecraft:underwater_bonemeals",
+        "#minecraft:wall_post_override",
+        "#minecraft:walls",
+        "minecraft:farmland",
+        "minecraft:enchanting_table",
+        "#minecraft:cauldrons"
+    ]
+}
+
+new tags.entity_types(beacon) {
+    "values": [
+        "minecraft:marker",
+        "minecraft:shulker"
+    ]
+}

@@ -1,4 +1,5 @@
-execute positioned ~-100 ~-100 ~-100 run function ebr:__private__/anonymous/4 with entity @s data.ebr
+execute if block ~ ~ ~ minecraft:beacon run function ebr:beacon/interact/found
+execute if block ~ ~ ~ #ebr:raycast positioned ^ ^ ^0.1 run function ebr:beacon/interact/raycast
 
 
 # ############################################################

@@ -1,4 +1,5 @@
-execute positioned ~-100 ~-100 ~-100 run function ebr:__private__/anonymous/4 with entity @s data.ebr
+execute if entity @s[type=shulker] run function ebr:beacon/kill
+execute if entity @s[type=marker] run function ebr:__private__/anonymous/1
 
 
 # ############################################################

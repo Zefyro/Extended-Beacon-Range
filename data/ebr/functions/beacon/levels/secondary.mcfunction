@@ -1,4 +1,4 @@
-execute positioned ~-100 ~-100 ~-100 run function ebr:__private__/anonymous/4 with entity @s data.ebr
+$effect give @a[dx=250,dy=435,dz=250] $(secondary_effect) 17 $(amplifier)
 
 
 # ############################################################

@@ -1,4 +1,5 @@
-execute positioned ~-100 ~-100 ~-100 run function ebr:__private__/anonymous/4 with entity @s data.ebr
+execute as @e[type=#ebr:beacon,tag=ebr.Beacon] at @s unless block ~ ~ ~ minecraft:beacon run function ebr:beacon/kill
+schedule function ebr:second 1s
 
 
 # ############################################################

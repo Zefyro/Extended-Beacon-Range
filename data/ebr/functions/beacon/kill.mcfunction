@@ -1,4 +1,5 @@
-execute positioned ~-100 ~-100 ~-100 run function ebr:__private__/anonymous/4 with entity @s data.ebr
+tp @s ~ -256 ~
+kill @s
 
 
 # ############################################################
