@@ -122,12 +122,12 @@ class Beacon {
         $execute 
             unless score $checked_y __variable__ matches $(build_height) 
             run $checked_y++;
-        $y_p1 = $checked_y;
-        $y_p1++;
+        $y = $checked_y;
+        $y++;
         $execute 
             if block ~ ~ ~ #ebr:beam 
             unless block ~ ~ ~ #minecraft:slabs[type=double]
-            if score $y_p1 __variable__ matches ..$(build_height)
+            if score $y __variable__ matches ..$(build_height)
             positioned ~ ~1 ~ 
             run Beacon.beam_check(build_height="$(build_height)");
 
