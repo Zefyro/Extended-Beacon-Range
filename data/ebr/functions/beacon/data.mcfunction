@@ -1,4 +1,7 @@
-execute positioned ~-100 ~-100 ~-100 run function ebr:__private__/anonymous/4 with entity @s data.ebr
+data modify entity @s data.ebr.primary_effect set from block ~ ~ ~ primary_effect
+data modify entity @s data.ebr.secondary_effect set from block ~ ~ ~ secondary_effect
+data modify entity @s data.ebr.Levels set from block ~ ~ ~ Levels
+execute store result score @s __variable__ run data get block ~ ~ ~ y
 
 
 # ############################################################

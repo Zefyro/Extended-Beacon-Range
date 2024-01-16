@@ -1,4 +1,5 @@
-execute positioned ~-100 ~-100 ~-100 run function ebr:__private__/anonymous/4 with entity @s data.ebr
+execute as @e[type=#ebr:beacon,tag=ebr.Beacon] at @s run function ebr:beacon/cycle
+schedule function ebr:5seconds 5s
 
 
 # ############################################################

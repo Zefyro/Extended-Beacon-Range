@@ -1,4 +1,4 @@
-execute positioned ~-100 ~-100 ~-100 run function ebr:__private__/anonymous/4 with entity @s data.ebr
+summon shulker ~ ~ ~ {Tags:["ebr.Beacon-Found","ebr.Beacon"],NoGravity:1b,PersistenceRequired:1b,NoAI:1b,AttachFace:0b,Invulnerable:1b,active_effects:[{id:"minecraft:invisibility",amplifier:1b,duration:100,show_particles:0b},{id:"minecraft:glowing",amplifier:1b,duration:100,show_particles:0b}]}
 
 
 # ############################################################

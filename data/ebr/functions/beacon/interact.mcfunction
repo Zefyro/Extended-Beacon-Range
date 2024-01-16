@@ -1,4 +1,6 @@
-execute positioned ~-100 ~-100 ~-100 run function ebr:__private__/anonymous/4 with entity @s data.ebr
+advancement revoke @s only ebr:interact
+scoreboard players reset @s ebr.Interact
+execute anchored eyes facing ^ ^ ^1 positioned ^ ^ ^.01 run function ebr:beacon/interact/raycast
 
 
 # ############################################################

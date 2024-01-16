@@ -1,0 +1,10 @@
+#uninstall
+
+#define BEACON(ENTITY_PATH, BLOCK_PATH) data modify entity @s ENTITY_PATH set from block  ~ ~ ~ BLOCK_PATH
+
+#credit "############################################################"
+#credit "#            This function was coded by Zefyro             #"
+#credit "#         Please don't claim this as your own work         #"
+#credit "# https://www.youtube.com/channel/UCFvS2PqA3qt1MgR3C9X_bog #"
+#credit "#                https://github.com/Zefyro                 #"
+#credit "############################################################"

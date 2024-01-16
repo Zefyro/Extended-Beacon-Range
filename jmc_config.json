@@ -1,0 +1,7 @@
+{
+    "namespace": "ebr",
+    "description": "Extended Beacon Range\nBy Zefyro",
+    "pack_format": "26",
+    "target": "main.jmc",
+    "output": "."
+}
