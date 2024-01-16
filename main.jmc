@@ -233,18 +233,17 @@ class Beacon {
 }
 
 function uninstall() {
-    
     tellraw @a [
         {
             "text": "Uninstalling datapack ",
             "color": "red"
         }, 
         {
-            "text":"\"Extended Beacon Range v1.0\"",
+            "text":"\"Extended Beacon Range v2.0\"",
             "color": "gray",
             "hoverEvent": {
                 "action": "show_text",
-                "value": "\"Extended-Beacon-Range_v1.0.zip\""
+                "value": "\"Extended-Beacon-Range_v2.0.zip\""
             },
             "clickEvent": {
                 "action": "open_url",
@@ -268,7 +267,7 @@ function uninstall() {
             "color": "red",
             "clickEvent": {
                 "action": "suggest_command",
-                "value": "/datapack disable \"Extended-Beacon-Range_v1.0.zip\""
+                "value": "/datapack disable \"Extended-Beacon-Range_v2.0.zip\""
             }
         }
     ];
