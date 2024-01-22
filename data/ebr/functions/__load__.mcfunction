@@ -1,5 +1,5 @@
 scoreboard objectives add __variable__ dummy
-tellraw @a [{"text":"Loading datapack ","color":"green"},{"text":"\"Extended Beacon Range v2.0\"","color":"gray","hoverEvent":{"action":"show_text","value":"\"Extended-Beacon-Range_v2.0.zip\""},"clickEvent":{"action":"open_url","value":"https://github.com/Zefyro/Extended-Beacon-Range"}},{"text":"...","color":"green"}]
+tellraw @a [{"text":"Loading datapack ","color":"green"},{"text":"\"Extended Beacon Range v2.1\"","color":"gray","hoverEvent":{"action":"show_text","value":"\"Extended-Beacon-Range_v2.1.zip\""},"clickEvent":{"action":"open_url","value":"https://github.com/Zefyro/Extended-Beacon-Range"}},{"text":"...","color":"green"}]
 scoreboard objectives add ebr.Interact minecraft.custom:minecraft.interact_with_beacon
 schedule function ebr:5seconds 5s
 schedule function ebr:second 1s
